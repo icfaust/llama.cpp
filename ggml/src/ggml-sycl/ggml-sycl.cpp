@@ -2597,7 +2597,7 @@ inline void ggml_sycl_op_mul_mat_sycl(
     int ldc = id == ctx.device ? ne0 : row_diff; // used by MKL only
 
 #ifdef GGML_SYCL_F16
-    bool use_fp16 = true;  // TODO(Yu) SYCL capability check
+    bool use_fp16 = dpct::get_device(id).has(sycl::aspect::fp16);
 #else
     bool use_fp16 = false;
 #endif
